@@ -97,10 +97,9 @@ def realizar_proyeccion(df, columna, total_length):
     X_future = np.arange(total_length).reshape(-1, 1)
     return modelo.predict(X_future)
 
-#server = flask.Flask(__name__)
-
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP]) #, server=server)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
+
 #### GRÁFICAS
 ## PESTAÑA 1
 
