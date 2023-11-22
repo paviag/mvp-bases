@@ -97,8 +97,10 @@ def realizar_proyeccion(df, columna, total_length):
     X_future = np.arange(total_length).reshape(-1, 1)
     return modelo.predict(X_future)
 
-dash_app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+#server = flask.Flask(__name__)
 
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP]) #, server=server)
+server = app.server
 #### GRÁFICAS
 ## PESTAÑA 1
 
@@ -340,7 +342,7 @@ tab_analisis_proyecciones_content = html.Div([
     ], style={"width": "90%"})
 ], style={"display":"flex", "justify-content":"center"})
 
-@dash_app.callback(
+@app.callback(
     Output('tendencia_proyeccion_graph', 'figure'),
     [Input('num_years_input', 'value')]
 )
@@ -397,7 +399,7 @@ title_style = {
     'color': 'black',
     'text-align': 'center'}
 
-dash_app.layout = html.Div([
+app.layout = html.Div([
     html.H1('DASHBOARD', 
             style={'font-family': 'Lucida Sans', 
                    'font-size': '36px',  
@@ -414,4 +416,4 @@ dash_app.layout = html.Div([
 ])
 
 if __name__ == '__main__':
-    dash_app.run(port="8000", debug=False)
+    app.run(host="0.0.0.0", port="8000", debug=False)
